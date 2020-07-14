@@ -1,0 +1,19 @@
+{
+  "name": "node.js-1-hw",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anastasiia512/Node.js-1-hw.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Anastasiia512/Node.js-1-hw/issues"
+  },
+  "homepage": "https://github.com/Anastasiia512/Node.js-1-hw#readme"
+}
