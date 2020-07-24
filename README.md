@@ -1,2 +1,2 @@
 # Node.js-1-hw
-![](screenshots/--list.png)
+[--action="list"](screenshots/--list.png)
