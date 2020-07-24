@@ -1,1 +1,1 @@
-![--action="list"](screenshots/--list.png "--action="list""))
+![--action="list"](screenshots/--list.png)
