@@ -1,24 +1,23 @@
-const fs = require('fs').promises;
-const path = require('path');
-const { v4 }= require("uuid");
+const fs = require("fs").promises;
+const path = require("path");
+const { v4 } = require("uuid");
 
-const contactsPath = path.join(__dirname, "./db/contacts.json");
+const contactsPath = path.join(__dirname, "../db/contacts.json");
 
 const listContacts = async () => {
   try {
     const contacts = await fs.readFile(contactsPath, "utf8");
     return JSON.parse(contacts);
   } catch (error) {
-      console.log(error);
+    console.log(error);
   }
-  
 };
 
 async function getContactById(contactId) {
   try {
-    const contacts = await fs.readFile(contactsPath, "utf-8");
-    parsedContacts = JSON.parse(contacts);
-    return parsedContacts.find((contact) => contact.id === contactId);
+    const contacts = await fs.readFile(contactsPath, "utf8");
+    const parsedContacts = JSON.parse(contacts);
+    return parsedContacts.find((contact) => contact.id === +contactId);
   } catch (error) {
     console.log(error);
   }
@@ -78,4 +77,10 @@ async function updateContact(contactId, updatedContact) {
   }
 }
 
-module.exports = { listContacts, getContactById, removeContact, addContact, updateContact};
+module.exports = {
+  listContacts,
+  getContactById,
+  removeContact,
+  addContact,
+  updateContact,
+};
