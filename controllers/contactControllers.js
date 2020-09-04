@@ -1,24 +1,21 @@
+const contactModel = require("../model/contact.model");
 const {
-  listContacts,
-  getContactById,
-  removeContact,
-  addContact,
-  updateContact,
-} = require("../services/contacts");
+  Types: { ObjectId },
+} = require("mongoose");
 
-module.exports.getAllContacts = async (req, res, next) => {
+getContacts = async (req, res, next) => {
   try {
-    const contactsList = await listContacts();
-    res.json({ status: "ok", contactsList });
+    const list = await contactModel.find();
+    return res.json({ status: "ok", list });
   } catch (error) {
     next(error);
   }
 };
 
-module.exports.getContact = async (req, res, next) => {
+getContact = async (req, res, next) => {
   try {
     const { contactId } = req.params;
-    const contact = await getContactById(contactId);
+    const contact = await contactModel.findById(contactId);
     if (!contact) {
       return res.status(404).json({ message: "Not found" });
     }
@@ -28,45 +25,51 @@ module.exports.getContact = async (req, res, next) => {
   }
 };
 
-module.exports.createContact = async (req, res, next) => {
+createContact = async (req, res, next) => {
   try {
-    const { name, email, phone } = req.body;
-    const createContact = await addContact(name, email, phone);
-    if (!name || !email || !phone) {
-      return res.status(400).json({ message: "missing required name field" });
-    }
+    const createContact = await contactModel.create(req.body);
     return res.status(201).json({ status: "ok", createContact });
   } catch (error) {
     next(error);
   }
 };
 
-module.exports.deleteContact = async (req, res, next) => {
+deleteContact = async (req, res, next) => {
   try {
     const { contactId } = req.params;
-    const contactById = await getContactById(contactId);
-    if (!contactById) {
+    const removeContact = await contactModel.findByIdAndDelete(contactId);
+    if (!removeContact) {
       return res.status(404).json({ message: "Not found" });
     }
-    await removeContact(contactId);
     return res.status(200).json({ status: "ok", message: "contact deleted" });
   } catch (error) {
     next(error);
   }
 };
 
-module.exports.patchContact = async (req, res, next) => {
+patchContact = async (req, res, next) => {
   try {
     const { contactId } = req.params;
     if (!Object.keys(req.body).length) {
       return res.status(400).json({ message: "missing fields" });
     }
-    const updatedContact = await updateContact(contactId, req.body);
-    if (!updatedContact) {
+    const update = await contactModel.findContactByIdAndUpdate(
+      contactId,
+      req.body
+    );
+    if (!update) {
       return res.status(404).json({ message: "Not found" });
     }
-    return res.status(200).json({ status: "ok", updatedContact });
+    return res.status(200).json({ status: "ok", update });
   } catch (error) {
     next(error);
   }
+};
+
+module.exports = {
+  getContacts,
+  getContact,
+  createContact,
+  deleteContact,
+  patchContact,
 };
