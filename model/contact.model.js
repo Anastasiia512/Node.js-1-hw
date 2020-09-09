@@ -11,12 +11,12 @@ const contactSchema = new Schema({
 });
 
 // custom method for  mongoose
-async function findContactByIdAndUpdate(contactId, params) {
+function findContactByIdAndUpdate(contactId, params) {
   return this.findByIdAndUpdate(contactId, { $set: params }, { new: true });
 }
 
 contactSchema.statics.findContactByIdAndUpdate = findContactByIdAndUpdate;
 
-const contactModel = mongoose.model("user", contactSchema);
+const contactModel = mongoose.model("Contact", contactSchema);
 
 module.exports = contactModel;

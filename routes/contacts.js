@@ -4,7 +4,7 @@ const Joi = require("@hapi/joi");
 const {
   Types: { ObjectId },
 } = require("mongoose");
-const contactController = require("../controllers/contactControllers");
+const contactController = require("../controllers/contactController");
 
 const validateCreateContact = (req, res, next) => {
   const validationRules = Joi.object({
