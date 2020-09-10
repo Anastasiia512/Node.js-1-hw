@@ -2,7 +2,7 @@ const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const passport = require("passport");
+const passport = require('passport');
 require("dotenv").config();
 require("./passport").initializeStrategies();
 
