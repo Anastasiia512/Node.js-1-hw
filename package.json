@@ -24,7 +24,7 @@
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
-    "pug": "^3.0.0",
+    "pug": "^3.0.1",
     "sandbox": "^0.8.6",
     "uglify-js": "^3.10.3"
   }
